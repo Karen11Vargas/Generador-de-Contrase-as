@@ -32,7 +32,6 @@ body{
 /*   Logotipos   */
 
 .logo{
-    margin-bottom: 40px;
     width: 100px;
     text-align: center;
 }
@@ -42,6 +41,13 @@ body{
     vertical-align: top;
 }
 
+.contenedor{
+    border-radius: 10px;
+   background-color: rgba(32, 94, 138, 0.5); /* el último valor es la opacidad */
+   padding: 20px;
+
+
+}
 /*   Filas y Columnas   */
 
 .app .fila{
