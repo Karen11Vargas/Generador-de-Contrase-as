@@ -1,8 +1,8 @@
 (function(){
      //Variables de la aplicacion 
 
-     var app = documento.getElementbyId('app');
-     var inputCaracteres = documento.getElementbyId('numero-caracteres');
+     var app = document.getElementById('app');
+     var inputCaracteres = document.getElementById('numero-caracteres');
 
     var configuracion = {
         caracteres : parseInt(inputCaracteres.value),
@@ -21,12 +21,43 @@
 
     // Eventos 
 
-    app.addEventListener('submit', function(e){   //Esta funcion ni permite que se haga un submit en el formulario
-        e.preventDefailt();
+    //Esta funcion ni permite que se haga un submit en el formulario
+    app.addEventListener('submit', function(e){   
+        e.preventDefault();
     });
 
-    app.elements.nameItem('btn-menos-uno'); //Accede a los elementos y encunetra el que tenga el id indicado
+    //Accede a los elementos y encunetra el que tenga el id indicado
+    app.elements.namedItem('btn-mas-uno').addEventListener('click', function(){
+        configuracion.caracteres++;
+        inputCaracteres.value = configuracion.caracteres;
+    }); 
 
+    app.elements.namedItem('btn-menos-uno').addEventListener('click', function(){
+        if (configuracion.caracteres>1) {
+            configuracion.caracteres--;
+            inputCaracteres.value = configuracion.caracteres;
+        }
+    }); 
+    
+
+    var btnOpciones=['btn-simbolos', 'btn-numeros', 'btn-mayusculas'];
+
+    for (let index = 0; index < btnOpciones.length; index++) {
+        app.elements.namedItem(btnOpciones[index]).addEventListener('click', function(){
+            btnCambio(this);
+            configuracion.simbolos = !configuracion.simbolos;
+            configuracion.numeros = !configuracion.numeros;
+            configuracion.mayusculas = !configuracion.mayusculas;
+        })
+    }
+  
+    //Funciones
+
+    function btnCambio(btn){
+        btn.classList.toggle('false');
+        btn.childNodes[0].classList.toggle('fa-check');
+        btn.childNodes[0].classList.toggle('fa-times');
+    }
      
 }
 ())
