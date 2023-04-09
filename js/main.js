@@ -50,6 +50,10 @@
             configuracion.mayusculas = !configuracion.mayusculas;
         })
     }
+
+    app.elements.namedItem('btn-generar').addEventListener('click', function(){
+        generarPassword()
+    })
   
     //Funciones
 
@@ -57,6 +61,29 @@
         btn.classList.toggle('false');
         btn.childNodes[0].classList.toggle('fa-check');
         btn.childNodes[0].classList.toggle('fa-times');
+    }
+
+    function generarPassword(){
+        var caracteresFinales = '';
+        var password = '';
+
+        //Se recorre el objeto porpiedad en cada una de sus propiedades y si la propiedad esta true
+        //esta se ira sumando a la variable de los caracteres finales 
+
+        for(propiedad in configuracion){
+            if (configuracion[propiedad] == true) {
+                caracteresFinales += caracteres[propiedad] + ' ';
+            }
+        }
+        caracteresFinales =caracteresFinales.trim(); //Quita espaciados al inicio y final de la cadena
+        caracteresFinales= caracteresFinales.split(' '); //Poner espacion, converitrlo en array 
+
+        for(var i = 0; i < configuracion.caracteres; i++){
+            password += caracteresFinales[ Math.floor(Math.random() * caracteresFinales.length)];
+        }
+
+
+       app.elements.namedItem('input-password').value = password;
     }
      
 }
